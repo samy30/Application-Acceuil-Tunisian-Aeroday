@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export class VoteAirshowPage extends React.Component {
+export default class VoteAirshowPage extends React.Component {
   render() {
+    const { navigation } = this.props;
     return (
       <View style={styles.container}>
         <Text>VoteAirshow works</Text>

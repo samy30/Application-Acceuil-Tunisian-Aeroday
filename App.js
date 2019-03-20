@@ -1,39 +1,24 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import {createStackNavigator, createAppContainer} from 'react-navigation';
-import {LandingPage} from './screens/LandingPage'
-import {LoadingPage} from './screens/LoadingPage'
-import {ParticipantPage} from './screens/ParticipantPage'
-import {ProfilePage} from './screens/ProfilePage'
-import {RealTimePage} from './screens/RealTimePage'
-import {SettingsPage} from './screens/SettingsPage'
-import {VoteAirshowPage} from './screens/VoteAirshowPage'
+import { Platform, StatusBar, Image } from 'react-native';
+import { AppLoading, Asset } from 'expo';
+import { Block, GalioProvider } from 'galio-framework';
+import { createAppContainer } from 'react-navigation';
 
-const MainNavigator = createStackNavigator({
-landingPage: {screen: LandingPage},
-loadingPage: {screen: LoadingPage},
-participantPage: {screen: ParticipantPage},
-profilePage: {screen: ProfilePage},
-realTimePage: {screen: RealTimePage},
-settingsPage: {screen: SettingsPage},
-voteAirshowPage: {screen: VoteAirshowPage}
-},
-{
-  initialRouteName: "landingPage"
-});
+import Screens from './navigation/Screens';
+import { Images, products, materialTheme } from './constants/';
 
-const AppNavigator = createAppContainer(MainNavigator);
+const App = createAppContainer(Screens);
+export default App;
+/*
 export default class App extends React.Component {
   render() {
-    return <AppNavigator />;
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+      return (
+        <GalioProvider theme={materialTheme}>
+          <Block flex>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            <Screens />
+          </Block>
+        </GalioProvider>
+      );
+    }
+  }*/
