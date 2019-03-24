@@ -1,10 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { registerForPushNodificationsAsync} from '../screens'
+
 export default class ParticipantPage extends React.Component {
-  componentWillMount(){
-  registerForPushNodificationsAsync() ;
-}
+
   render() {
     return (
       <View style={styles.container}>
