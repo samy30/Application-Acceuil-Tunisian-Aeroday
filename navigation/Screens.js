@@ -54,7 +54,7 @@ const LandingPageStack = createStackNavigator({
   Landing: {
     screen: LandingPage,
     navigationOptions: ({ navigation }) => ({
-      header: <Header white transparent title="LandingPage" navigation={navigation} />,
+      //header: <Header white transparent title="LandingPage" navigation={navigation} />,
       headerTransparent: true,
     })
   },
@@ -67,7 +67,8 @@ const LoadingPageStack = createStackNavigator({
   Loading: {
     screen: LoadingPage,
     navigationOptions: ({ navigation }) => ({
-      header: <Header back title="LoadingPage" navigation={navigation} />,
+      //header: <Header back title="LoadingPage" navigation={navigation} />,
+      headerTransparent: true,
     })
   },
 }, {

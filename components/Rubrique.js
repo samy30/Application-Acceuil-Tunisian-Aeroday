@@ -7,22 +7,21 @@ import materialTheme from '../constants/Theme';
 
 const { width } = Dimensions.get('screen');
 
-class Product extends React.Component {
+class Rubrique extends React.Component {
   render() {
-    const { navigation, product, horizontal, full, style, priceColor, imageStyle } = this.props;
+    const { navigation, rubrique, horizontal, full, style, priceColor, imageStyle } = this.props;
     const imageStyles = [styles.image, full ? styles.fullImage : styles.horizontalImage, imageStyle];
 
     return (
-      <Block row={horizontal} card flex style={[styles.product, styles.shadow, style]}>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro', { product: product })}>
+      <Block row={horizontal} card flex style={[styles.rubrique, styles.shadow, style]}>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro', { rubrique: rubrique })}>
           <Block flex style={[styles.imageContainer, styles.shadow]}>
-            <Image source={{ uri: product.image }} style={imageStyles} />
+            <Image source={rubrique.image} style={imageStyles} />
           </Block>
         </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro', { product: product })}>
-          <Block flex space="between" style={styles.productDescription}>
-            <Text size={14} style={styles.productTitle}>{product.title}</Text>
-            <Text size={12} muted={!priceColor} color={priceColor}>${product.price}</Text>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro', { rubrique: rubrique })}>
+          <Block flex space="between" style={styles.rubriqueDescription}>
+            <Text size={14} style={styles.rubriqueTitle}>{rubrique.title}</Text>
           </Block>
         </TouchableWithoutFeedback>
       </Block>
@@ -30,10 +29,10 @@ class Product extends React.Component {
   }
 }
 
-export default withNavigation(Product);
+export default withNavigation(Rubrique);
 
 const styles = StyleSheet.create({
-  product: {
+  rubrique: {
     backgroundColor: theme.COLORS.WHITE,
     marginVertical: theme.SIZES.BASE,
     borderWidth: 0,
