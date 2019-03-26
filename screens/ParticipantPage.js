@@ -1,11 +1,11 @@
 import React,{component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { registerForPushNodificationsAsync} from '../screens'
+import { registerForPushNotificationsAsync} from '../services'
 
 
 export default class ParticipantPage extends React.Component {
 componentWillMount(){
-  registerForPushNodificationsAsync() ;
+  registerForPushNotificationsAsync() ;
 }
 
   render() {
