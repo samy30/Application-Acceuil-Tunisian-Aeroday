@@ -15,10 +15,6 @@ componentWillMount(){
       </View>
     );
   }
-
-
-
-  
 }
 
 
