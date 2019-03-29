@@ -1,17 +1,52 @@
 import React from 'react';
 import { StyleSheet, Dimensions, ScrollView } from 'react-native';
-import { Button, Block, Text, Input, theme } from 'galio-framework';
+import { Button, Block, Text, Input, theme, Image } from 'galio-framework';
 import { Icon, Rubrique } from '../components/';
 import rubriques from '../constants/rubriques'
 
 const { height, width } = Dimensions.get('screen');
 
 export default class LandingPage extends React.Component {
+
+  renderMyHeader = () => {
+    return (
+      <Block row>
+      <Image
+      source={require('../assets/images/firstTest.jpg')}
+      style={{ height: height, width: width }}
+      />
+      <Text>blablabla</Text>
+      </Block>
+    )
+  }
+  renderTabs = () => {
+    const { navigation } = this.props;
+
+    return (
+      <Block row style={styles.tabs}>
+        <Button shadowless style={[styles.tab, styles.divider]} onPress={() => navigation.navigate('Landing')}>
+          <Block row middle>
+            <Icon name="grid-square" family="Galio" style={{ paddingRight: 8 }} />
+            <Text size={16} style={styles.tabTitle}>Acceuil</Text>
+          </Block>
+        </Button>
+        <Button shadowless style={styles.tab} onPress={() => navigation.navigate('Loading')}>
+          <Block row middle>
+            <Icon size={16} name="camera-18" family="GalioExtra" style={{ paddingRight: 8 }} />
+            <Text size={16} style={styles.tabTitle}>Informations</Text>
+          </Block>
+        </Button>
+      </Block>
+    )
+  }
+
   renderProducts = () => {
     return (
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.rubrique}>
+        {this.renderMyHeader()}
+        {this.renderTabs()}
         <Block flex>
           <Rubrique rubrique={rubriques[0]} horizontal />
           <Block flex row>
