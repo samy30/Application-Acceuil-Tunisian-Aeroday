@@ -7,34 +7,36 @@ export const HeaderHeight = theme.SIZES.BASE * 3.5 + (StatusHeight || 0);
 export const iPhoneX = () =>
   Platform.OS === "ios" && (height === 812 || width === 812);
 
-export const storeVoteStatus = async () => {
+export const storeVotedItem = async (index) => {
   try {
-    await AsyncStorage.setItem("status", "Voted");
+    await AsyncStorage.setItem("votedItemIndex", index+"");
     return true;
   } catch (error) {
     // Error saving data
+    console.log("ERRROOR" + error);
     return false;
   }
 };
 
-export const retrieveVoteStatus = async () => {
+export const retrieveVotedItem = async () => {
   try {
-    const value = await AsyncStorage.getItem("status");
-    if (value !== null) {
+    const index = await AsyncStorage.getItem("votedItemIndex");
+    console.log(index);
+    if (index != null && index!= undefined) {
       // We have data!!
-      return true;
+      return index;
     }
-    return false;
+    return null;
   } catch (error) {
     // Error retrieving data
     console.log(error);
-    return false;
+    return null;
   }
 };
 
-export const removeVoteStatus = async () => {
+export const removeVotedItem = async () => {
   try {
-    const value = await AsyncStorage.removeItem("status");
+    await AsyncStorage.removeItem("votedItemIndex");
     return true;
   } catch (error) {
     // Error retrieving data
@@ -42,3 +44,7 @@ export const removeVoteStatus = async () => {
     return false;
   }
 };
+
+export const fetchParticipants = async () => {
+  
+}

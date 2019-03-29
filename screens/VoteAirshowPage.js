@@ -1,58 +1,16 @@
 import React from "react";
 import { StyleSheet, FlatList, View } from "react-native";
-import { ListItem, Text } from "react-native-elements";
-import { storeVoteStatus, retrieveVoteStatus, removeVoteStatus } from '../constants/utils';
+import { ListItem, Text, Icon, Button } from "react-native-elements";
+import theme from "../constants/Theme";
 
-const teams = [
-  {
-    name: "Equipe 1",
-    avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
-  },
-  {
-    name: "Equipe 2",
-    avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
-  },
-  {
-    name: "Equipe 3",
-    avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
-  },
-  {
-    name: "Equipe 4",
-    avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
-  },
-  {
-    name: "Equipe 5",
-    avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
-  },
-  {
-    name: "Equipe 6",
-    avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
-  },
-  {
-    name: "Equipe 7",
-    avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
-  },
-  {
-    name: "Equipe 8",
-    avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
-  },
-  {
-    name: "Equipe 9",
-    avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
-  },
-  {
-    name: "Equipe 10",
-    avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
-  },
-  {
-    name: "Equipe 11",
-    avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
-  },
-  {
-    name: "Equipe 12",
-    avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
-  }
-];
+import {
+  removeVotedItem,
+  retrieveVotedItem,
+  storeVotedItem
+} from "../constants/utils";
+import { db } from "../config ";
+
+const ref = db.ref("/AirshowParticipant");
 
 export default class VoteAirshowPage extends React.Component {
   constructor(props) {
@@ -61,102 +19,166 @@ export default class VoteAirshowPage extends React.Component {
     this.state = {
       voted: false,
       isLoading: true,
-      isFetching: false
+      isFetching: false,
+      votedItemIndex: null,
+      participants: null
     };
 
     this.fetchData = this.fetchData.bind(this);
-    this.handlePress = this.handlePress.bind(this);
+    this.handleVote = this.handleVote.bind(this);
+    this.handleChangeVote = this.handleChangeVote.bind(this);
+    this.vote = this.vote.bind(this);
   }
 
- // In case you want to remove the vote status for debugging purposes, uncomment the code below.
+  // Uncomment this if you need to remove the vote from the phone's storage (ONLY FOR DEBUGGING PURPOSES).
 
   // componentWillMount() {
-  //   removeVoteStatus()
+  //   removeVotedItem()
   //   .then(status => {
-  //     console.log(status);
+  //     console.log("Will mount: " + status);
   //   })
   // }
 
   componentDidMount() {
-    retrieveVoteStatus()
-    .then(status => {
-      if(status) {
+    retrieveVotedItem().then(result => {
+      console.log(result);
+      if (result != null) {
         this.setState({
           voted: true,
+          votedItemIndex: result,
           isLoading: false,
           isFetching: false
-        })
-      }
-      else {
+        });
+      } else {
         this.setState({
           voted: false,
           isLoading: false,
-          isFetching: true
+          isFetching: true,
+          votedItemIndex: null,
         });
-
-        this.fetchData();
       }
-    })
+
+      this.fetchData();
+    });
   }
-  
+
   fetchData() {
-    setTimeout(() => {
+    ref.once("value").then(snap => {
+      let participants = snap.val();
+      console.log(participants);
       this.setState({
+        participants,
         isFetching: false
-      })
-    }, 2000)
+      });
+    });
   }
 
-  handlePress(){
-    storeVoteStatus()
-    .then(status => {
-      if(status) {
-        this.setState({
-          voted: true
+  vote(item, index) {
+    let ref1 = db.ref("/AirshowParticipant/" + index);
+    let newVotes = item.votes + 1;
+    return ref1.update({ votes: newVotes });
+  }
+
+  unvote(item, index) {
+    let ref1 = db.ref("/AirshowParticipant/" + index);
+    let newVotes = item.votes - 1;
+    return ref1.update({ votes: newVotes });
+  }
+
+  handleVote(item, index) {
+    console.log('Hello!');
+    this.vote(item, index)
+      .then(() => {
+        storeVotedItem(index).then(status => {
+          console.log("Store voted item status: "+status);
+          if (status) {
+            this.setState({
+              isLoading: false,
+              isFetching: true,
+              voted: true,
+              votedItemIndex: index
+            });
+
+            this.fetchData();
+
+          }
         });
-      }
-    })
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  handleChangeVote(index) {
+    let item = this.state.participants[index];
+
+    this.unvote(item, index)
+      .then(() =>
+        removeVotedItem().then(status => {
+          if (status) {
+            this.setState({
+              voted: false,
+              isLoading: false,
+              isFetching: true,
+              votedItemIndex: null
+            });
+
+            this.fetchData();
+          }
+        })
+      )
+      .catch(err => console.log(err));
   }
 
   keyExtractor = (item, index) => index.toString();
 
-  renderItem = ({ item }) => (
+  renderItem = ({ item, index }) => (
     <ListItem
       title={item.name}
       titleStyle={styles.titleStyle}
       subtitle="Votez pour cette équipe"
-      leftAvatar={{ source: { uri: item.avatar } }}
+      // leftAvatar={{ source: { uri: item.avatar } }}
       bottomDivider={true}
-      onPress={this.handlePress}
+      onPress={() => this.handleVote(item, index)}
     />
   );
 
   render() {
-    const { isLoading, voted, isFetching } = this.state;
+    const { isLoading, voted, isFetching, participants } = this.state;
 
     if (isLoading) {
       <View style={styles.loading}>
-      <Text style={styles.loadingText}>
-        Loading...
-      </Text>
-    </View>
-    }
-    else if(voted) {
+        <Text style={styles.loadingText}>Loading...</Text>
+      </View>;
+    } else if (voted) {
       return (
         <View style={styles.loading}>
-          <Text style={styles.votedText}>
-            Thank you for your vote! 😀
-          </Text>
+          <Icon
+            style={styles.checkIcon}
+            name="check"
+            type="evilicon"
+            color={theme.COLORS.SUCCESS}
+            size={72}
+          />
+          <Text style={styles.votedText}>Thank you for your vote!</Text>
+          <Button
+            title="Change vote?"
+            type="outline"
+            titleStyle={styles.buttonStyle}
+            onPress={() => this.handleChangeVote(this.state.votedItemIndex)}
+          />
         </View>
       );
-    }
-    else if (isFetching) {
+    } else if (isFetching) {
       return (
         <View style={styles.loading}>
-        <Text style={styles.loadingText}>
-          Fetching teams...
-        </Text>
-      </View>
+          <Icon
+            name="spinner-3"
+            type="evilicon"
+            size={72}
+            color={theme.COLORS.PRIMARY}
+          />
+        </View>
       );
     }
     return (
@@ -164,7 +186,7 @@ export default class VoteAirshowPage extends React.Component {
         <Text style={styles.textStyle}>Votez pour une équipe</Text>
         <FlatList
           keyExtractor={this.keyExtractor}
-          data={teams}
+          data={participants}
           renderItem={this.renderItem}
         />
       </View>
@@ -181,7 +203,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#fff"
   },
   textStyle: {
     padding: 10,
@@ -195,7 +217,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   votedText: {
-    fontSize: 24,
-    fontWeight: 'bold'
+    marginTop: 25,
+    marginBottom: 10,
+    fontSize: 24
+  },
+  checkIcon: {
+    paddingBottom: 40
+  },
+  buttonStyle: {
+    color: theme.COLORS.BUTTON_COLOR
   }
 });
