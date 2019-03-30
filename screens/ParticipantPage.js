@@ -23,10 +23,6 @@ handleNotification = (notification) =>
       </View>
     );
   }
-
-
-
-  
 }
 
 
