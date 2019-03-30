@@ -42,9 +42,14 @@ render() {
   );
 }
 
+handleNotification  (notification)
+{
+  this.setState({notification: notification});
+  console.log('hey');
+  console.log(notification);
 
 
-
+}
 }
 
 
@@ -57,27 +62,8 @@ container: {
 },
 });
 
- 
-
-handleNotification  (notification) 
-
-{
-  this.setState({notification: notification});
-  console.log('hey');
-  console.log(notification);
-}
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Participant Page works</Text>
-      </View>
-    );
-  }
-
-
-
   
-}
+
 
 
 const styles = StyleSheet.create({
