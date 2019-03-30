@@ -10,7 +10,7 @@ componentWillMount(){
   Notifications.addListener(this.handleNotifications) ;
   console.log('hoooo');
 }
-handleNotification = (notification) => 
+handleNotification  (notification) 
 
 {
   console.log('hey');
@@ -23,6 +23,10 @@ handleNotification = (notification) =>
       </View>
     );
   }
+
+
+
+  
 }
 
 
