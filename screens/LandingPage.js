@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Dimensions, ScrollView } from 'react-native';
-import { Button, Block, Text, Input, theme, Image } from 'galio-framework';
+import { StyleSheet, Dimensions, ScrollView, Image } from 'react-native';
+import { Button, Block, Text, Input, theme } from 'galio-framework';
 import { Icon, Rubrique } from '../components/';
 import rubriques from '../constants/rubriques'
 
@@ -11,10 +11,7 @@ export default class LandingPage extends React.Component {
   renderMyHeader = () => {
     return (
       <Block row>
-      <Image
-      source={require('../assets/images/firstTest.jpg')}
-      style={{ height: height, width: width }}
-      />
+      <Image source={require('../assets/images/airshow.jpg')} style={styles.avatar} />
       <Text>blablabla</Text>
       </Block>
     )
@@ -117,5 +114,11 @@ const styles = StyleSheet.create({
   rubrique: {
     width: width - theme.SIZES.BASE * 2,
     paddingVertical: theme.SIZES.BASE * 2,
+  },
+  avatar: {
+    height: 40,
+    width: 80,
+    //borderRadius: 20,
+    marginBottom: theme.SIZES.LEFT,
   },
 });
