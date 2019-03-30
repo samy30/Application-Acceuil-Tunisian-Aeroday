@@ -5,14 +5,19 @@ import { registerForPushNotificationsAsync} from '../services'
 
 
 export default class ParticipantPage extends React.Component {
+  state = {
+    notification: {},
+  };
+
 componentWillMount(){
   registerForPushNotificationsAsync() ;
-  Notifications.addListener(this.handleNotifications) ;
-  console.log('hoooo');
+  //this.notificationSubscription = Notifications.addListener(this._handleNotifications) ;
+  //console.log('hoooo');
+  //console.log(this.notificationSubscription);
 }
-handleNotification = (notification) => 
-
+_handleNotification = (notification) => 
 {
+  this.setState({notification: notification});
   console.log('hey');
   console.log(notification);
 }
