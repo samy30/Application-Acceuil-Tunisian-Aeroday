@@ -2,6 +2,11 @@ import React,{component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {Notifications} from 'expo';
 import { registerForPushNotificationsAsync} from '../services'
+import { db } from '../config';
+
+
+let ParticipantsRef= db.ref('/AirshowParticipants')
+
 
 
 export default class ParticipantPage extends React.Component {
@@ -15,12 +20,47 @@ componentWillMount(){
   //console.log('hoooo');
   //console.log(this.notificationSubscription);
 }
-<<<<<<< HEAD
+componentDidMount() 
+{
+  ParticipantsRef.on('value', snapshot => {
+    let data = snapshot.val();
+    let items = Object.values(data);
+    this.setState({ items });
+  });
+}
+render() {
+  console.log(this.state.items);
+  return (
+    <View style={styles.container}>
+    {this.state.items.length > 0 ? (
+        <Text>there are items</Text>
+      ) : (
+        <Text>No items</Text>
+      )}
+      <Text>Participant Page works</Text>
+    </View>
+  );
+}
+
+
+
+
+}
+
+
+const styles = StyleSheet.create({
+container: {
+  flex: 1,
+  backgroundColor: '#fff',
+  alignItems: 'center',
+  justifyContent: 'center',
+},
+});
+
+ 
+
 handleNotification  (notification) 
 
-=======
-_handleNotification = (notification) => 
->>>>>>> ab649f99e164acad72427ed7bd901d0930a5bc42
 {
   this.setState({notification: notification});
   console.log('hey');
