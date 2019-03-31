@@ -11,16 +11,8 @@ export default class ParticipantPage extends React.Component {
 
 componentWillMount(){
   registerForPushNotificationsAsync() ;
-  //this.notificationSubscription = Notifications.addListener(this._handleNotifications) ;
-  //console.log('hoooo');
-  //console.log(this.notificationSubscription);
-}
-_handleNotification = (notification) => 
-{
-  this.setState({notification: notification});
-  console.log('hey');
-  console.log(notification);
-}
+ }
+ 
   render() {
     return (
       <View style={styles.container}>
