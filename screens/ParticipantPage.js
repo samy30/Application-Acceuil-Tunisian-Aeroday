@@ -1,22 +1,38 @@
-import React,{component} from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import {Notifications} from 'expo';
 import { registerForPushNotificationsAsync} from '../services'
 import { db } from '../config';
 
 
-let ParticipantsRef= db.ref('/AirshowParticipants')
+let ParticipantsRef= db.ref('/participants')
 
 
 
 export default class ParticipantPage extends React.Component {
   state = {
     notification: {},
+    tokens: []
   };
 
 componentWillMount(){
   registerForPushNotificationsAsync() ;
  }
+
+componentDidMount() {
+  ParticipantsRef.on('value', snapshot => {
+    let data = snapshot.val();
+    let items = Object.values(data);
+    let tokens = [];
+    this.setState({ items });
+    console.log(items);
+    items.forEach(element => {
+      tokens.push(element.token)
+    });
+    this.setState({tokens});
+    console.log(tokens);
+  });
+ }
+
  
   render() {
     return (
@@ -28,7 +44,7 @@ componentWillMount(){
 }
 
 
-  
+
 
 const styles = StyleSheet.create({
   container: {

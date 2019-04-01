@@ -1,6 +1,14 @@
 import { Permissions, Notifications } from 'expo';
+import { db } from '../config';
 
 //const PUSH_ENDPOINT = 'https://your-server.com/users/push-token';
+let ParticipantsRef= db.ref('/participants')
+
+updateToken = (index,mytoken) => {
+  let ref1 = db.ref("/participants/" + index);
+  console.log("helllooooo"+mytoken);
+  ref1.update({ token: mytoken });
+}
 
 const registerForPushNotificationsAsync = async() => {
   const { status: existingStatus } = await Permissions.getAsync(
@@ -25,6 +33,7 @@ const registerForPushNotificationsAsync = async() => {
   // Get the token that uniquely identifies this device
   let token = await Notifications.getExpoPushTokenAsync();
   console.log(token);
+  updateToken(0,token);
 
 };
 export {registerForPushNotificationsAsync} ;
