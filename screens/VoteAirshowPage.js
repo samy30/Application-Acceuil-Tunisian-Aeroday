@@ -10,7 +10,7 @@ import {
 } from "../constants/utils";
 import { db } from "../config ";
 
-const ref = db.ref("/AirshowParticipant");
+const ref = db.ref("/AirshowParticipants");
 
 export default class VoteAirshowPage extends React.Component {
   constructor(props) {
