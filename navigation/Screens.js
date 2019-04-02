@@ -106,7 +106,7 @@ const RealTimePageStack = createStackNavigator({
   RealTime: {
     screen: RealTimePage,
     navigationOptions: ({ navigation }) => ({
-      header: <Header back title="RealTimePage" navigation={navigation} />,
+      header: <Header back title="Ce que se passe Maintenant à l'AERODAY" navigation={navigation} />,
     })
   },
 }, {

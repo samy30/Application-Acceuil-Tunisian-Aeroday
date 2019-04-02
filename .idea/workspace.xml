@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef12bc8c-4755-41c4-bd9d-0ecd517604f1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/components/Product.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/constants/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/navigation/Screens.js" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/Screens.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/LandingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/LandingPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/LoadingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/LoadingPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/RealTimePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/RealTimePage.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,11 +17,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            <state>
+              <caret lean-forward="true" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/screens/RealTimePage.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="382">
+              <caret line="40" column="10" lean-forward="true" selection-start-line="40" selection-start-column="10" selection-end-line="40" selection-end-column="10" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -33,6 +54,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/screens/RealTimePage.js" />
+      </list>
+    </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="77" />
@@ -50,12 +78,12 @@
         <subPane>
           <expand>
             <path>
-              <item name="TunisianAeroday" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TunisianAeroday" type="462c0819:PsiDirectoryNode" />
+              <item name="Application-Acceuil-Tunisian-Aeroday" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Application-Acceuil-Tunisian-Aeroday" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="TunisianAeroday" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TunisianAeroday" type="462c0819:PsiDirectoryNode" />
+              <item name="Application-Acceuil-Tunisian-Aeroday" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Application-Acceuil-Tunisian-Aeroday" type="462c0819:PsiDirectoryNode" />
               <item name="screens" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -68,7 +96,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/WebProjects/Site-Parapharmacie/front/para" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -96,11 +124,12 @@
       <updated>1552920270035</updated>
       <workItem from="1552920271889" duration="67000" />
       <workItem from="1553539337577" duration="56000" />
+      <workItem from="1554150693310" duration="500000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="123000" />
+    <option name="totallyTimeSpent" value="623000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
@@ -131,8 +160,28 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        <state>
+          <caret lean-forward="true" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/screens/RealTimePage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="40" column="10" lean-forward="true" selection-start-line="40" selection-start-column="10" selection-end-line="40" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
