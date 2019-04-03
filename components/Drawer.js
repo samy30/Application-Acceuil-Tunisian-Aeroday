@@ -12,19 +12,19 @@ class DrawerItem extends React.Component {
     const { title, focused } = this.props;
 
     switch (title) {
-      case 'Home':
+      case 'LandingPage':
         return (
           <Icon
             size={16}
-            name="shop"
+            name="home"
             family="GalioExtra"
             color={focused ? 'white' : materialTheme.COLORS.MUTED} />
         );
-      case 'Woman':
+      case 'VoteAirshow':
         return (
           <Icon
             size={16}
-            name="users-wm"
+            name="vote"
             family="Galio"
             color={focused ? 'white' : materialTheme.COLORS.MUTED} />
         );
@@ -36,7 +36,7 @@ class DrawerItem extends React.Component {
             family="Galio"
             color={focused ? 'white' : materialTheme.COLORS.MUTED} />
         );
-      case 'Kids':
+      case 'LoadingPage':
         return (
           <Icon
             size={16}
