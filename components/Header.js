@@ -1,7 +1,8 @@
 import React from 'react';
 import { withNavigation } from 'react-navigation';
-import { TouchableOpacity, StyleSheet, Platform, Dimensions } from 'react-native';
+import { TouchableOpacity, StyleSheet, Platform, Dimensions, Linking } from 'react-native';
 import { Button, Block, NavBar, Input, Text, theme } from 'galio-framework';
+import { Ionicons, FontAwesome, MaterialIcons, Entypo, AntDesign } from '@expo/vector-icons';
 
 import Icon from './Icon';
 import materialTheme from '../constants/Theme';
@@ -102,6 +103,18 @@ class Header extends React.Component {
           <ChatButton key='chat-search' navigation={navigation} isWhite={white} />,
           <BasketButton key='basket-search' navigation={navigation} isWhite={white} />
         ]);
+      case 'Landing':
+      return ([
+        <Entypo name="facebook" size={26} color='#3C5A99' key='facebook-icon' style={styles.icon} onPress={() => {
+          Linking.openURL('https://www.facebook.com/TunAeroday/');
+        }} />,
+        <AntDesign name="instagram" size={26} key='instagram-icon' style={styles.icon} onPress={() => {
+          Linking.openURL('https://www.instagram.com/tunisian_aeroday/?hl=en');
+        }}/>,
+        <AntDesign name="youtube" size={26} color='#c4302b' key='youtube-icon' style={styles.icon} onPress={() => {
+          Linking.openURL('https://www.youtube.com/channel/UCNPHxMaq-U-SdleuJgISVqQ');
+        }}/>
+      ]);
       default:
         break;
     }
@@ -194,6 +207,9 @@ const styles = StyleSheet.create({
     padding: 12,
     position: 'relative',
   },
+  icon: {
+    padding: 5,
+  },
   title: {
     width: '100%',
     fontSize: 16,
@@ -203,6 +219,7 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
     paddingBottom: theme.SIZES.BASE * 1.5,
     paddingTop: iPhoneX ? theme.SIZES.BASE * 4 : theme.SIZES.BASE,
+    paddingRight: 7,
     zIndex: 5,
   },
   shadow: {

@@ -1,13 +1,20 @@
 import React from "react";
 import { DrawerItems } from 'react-navigation';
-import { ScrollView, StyleSheet, Dimensions } from "react-native";
-import { Block, theme } from "galio-framework";
+import {  TouchableWithoutFeedback, ScrollView, StyleSheet, Dimensions, Image } from "react-native";
+import { Block, theme, Text } from "galio-framework";
+import { Images, materialTheme } from "../constants/";
+import { Icon } from '../components/';
 
 const { width } = Dimensions.get('screen');
 
 const Drawer = (props) => (
   <Block style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
     <Block flex={0.2} style={styles.header}>
+    <TouchableWithoutFeedback onPress={() => props.navigation.navigate('Profile')} >
+        <Block style={styles.profile}>
+          <Image source={require('../assets/images/LogoAeroday3.png')} style={styles.logo} />
+        </Block>
+      </TouchableWithoutFeedback>
     </Block>
     <Block flex>
       <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
@@ -16,6 +23,13 @@ const Drawer = (props) => (
     </Block>
   </Block>
 );
+const profile = {
+  avatar: Images.Profile,
+  name: 'Rachel Brown',
+  type: 'Seller',
+  plan: 'Pro',
+  rating: 4.8
+};
 
 const Menu = {
   contentComponent: props => <Drawer {...props} />,
@@ -50,7 +64,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    backgroundColor: '#4B1958',
+    backgroundColor: '#313A75',
     paddingHorizontal: 28,
     paddingBottom: theme.SIZES.BASE,
     paddingTop: theme.SIZES.BASE * 2,
@@ -68,6 +82,10 @@ const styles = StyleSheet.create({
     width: 40,
     borderRadius: 20,
     marginBottom: theme.SIZES.BASE,
+  },
+  logo: {
+    height: '87%',
+    width: '87%',
   },
   pro: {
     backgroundColor: "yellow",

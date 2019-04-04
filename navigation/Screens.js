@@ -54,7 +54,7 @@ const LandingPageStack = createStackNavigator({
   Landing: {
     screen: LandingPage,
     navigationOptions: ({ navigation }) => ({
-      header: <Header white transparent title="LandingPage" navigation={navigation} />,
+      header: <Header title="Acceuil" navigation={navigation} />,
       headerTransparent: true,
     })
   },
@@ -67,7 +67,8 @@ const LoadingPageStack = createStackNavigator({
   Loading: {
     screen: LoadingPage,
     navigationOptions: ({ navigation }) => ({
-      header: <Header back title="LoadingPage" navigation={navigation} />,
+      //header: <Header back title="LoadingPage" navigation={navigation} />,
+      headerTransparent: true,
     })
   },
 }, {
@@ -105,7 +106,7 @@ const RealTimePageStack = createStackNavigator({
   RealTime: {
     screen: RealTimePage,
     navigationOptions: ({ navigation }) => ({
-      header: <Header back title="RealTimePage" navigation={navigation} />,
+      header: <Header back title="Ce que se passe Maintenant à l'AERODAY" navigation={navigation} />,
     })
   },
 }, {
@@ -144,23 +145,27 @@ const VoteAirshowPageStack = createStackNavigator({
 
 const AppStack = createDrawerNavigator(
   {
+    LoadingPage: {
+      screen: LoadingPageStack,
+      navigationOptions: {
+        drawerLabel: () => {},
+      },
+      /*navigationOptions: (navOpt) => ({
+        /*drawerLabel: ({focused}) => (
+          <Drawer focused={focused} screen="Home" title="LoadingPage" />
+        ),
+      }),*/
+    },
+
     LandingPage: {
       screen: LandingPageStack,
       navigationOptions: {
         drawerLabel: ({focused}) => (
-          <Drawer focused={focused} screen="Home" title="LandingPage" />
+          <Drawer tabs focused={focused} screen="Home" title="Acceuil" />
         ),
       },
     },
-    LoadingPage: {
-      screen: LoadingPageStack,
-      navigationOptions: (navOpt) => ({
-        drawerLabel: ({focused}) => (
-          <Drawer focused={focused} screen="Home" title="LoadingPage" />
-        ),
-      }),
-    },
-    ParticipantPage: {
+    /*ParticipantPage: {
       screen: ParticipantPageStack,
       navigationOptions: (navOpt) => ({
         drawerLabel: ({focused}) => (
@@ -175,20 +180,20 @@ const AppStack = createDrawerNavigator(
           <Drawer focused={focused} screen="Pro" title="ProfilePage" />
         ),
       }),
-    },
-    SettingsPage: {
+    },*/
+    /*SettingsPage: {
       screen: SettingsPageStack,
       navigationOptions: (navOpt) => ({
         drawerLabel: ({focused}) => (
           <Drawer focused={focused} screen="Pro" title="Settings" />
         ),
       }),
-    },
+    },*/
     VoteAirshowPage: {
       screen: VoteAirshowPageStack,
       navigationOptions: (navOpt) => ({
         drawerLabel: ({focused}) => (
-          <Drawer focused={focused} screen="Pro" title="VoteAirshow" />
+          <Drawer focused={focused} screen="Pro" title="Vote Airshow" />
         ),
       }),
     },
@@ -197,7 +202,7 @@ const AppStack = createDrawerNavigator(
       screen: RealTimePageStack,
       navigationOptions: (navOpt) => ({
         drawerLabel: ({focused}) => (
-          <Drawer focused={focused} screen="Pro" title="RealTime" />
+          <Drawer focused={focused} screen="Pro" title="Temps Réel" />
         ),
       }),
     },

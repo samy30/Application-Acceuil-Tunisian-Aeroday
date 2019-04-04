@@ -8,7 +8,7 @@ import {
   retrieveVotedItem,
   storeVotedItem
 } from "../constants/utils";
-import { db } from "../config ";
+import { db } from "../config";
 
 const ref = db.ref("/AirshowParticipants");
 

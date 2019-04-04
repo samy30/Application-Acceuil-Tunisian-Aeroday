@@ -1,17 +1,18 @@
 import Button from './Button';
 import Icon from './Icon';
 import Tabs from './Tabs';
-import Product from './Product';
 import Drawer from './Drawer';
 import Header from './Header';
 import Switch from './Switch';
-
+import Rubrique from './Rubrique';
+import Competition from "./Competition";
 export {
   Button,
   Icon,
   Tabs,
-  Product,
   Drawer,
   Header,
   Switch,
+  Rubrique,
+  Competition,
 };

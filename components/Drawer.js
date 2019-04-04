@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Block, Text, theme } from "galio-framework";
 
-import Icon from './Icon';
+import { Ionicons, FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import materialTheme from '../constants/Theme';
 
 const proScreens = ['Woman', 'Man', 'Kids', 'New Collection', 'Sign In', 'Sign Up'];
@@ -12,31 +12,20 @@ class DrawerItem extends React.Component {
     const { title, focused } = this.props;
 
     switch (title) {
-      case 'Home':
+      case 'Acceuil':
         return (
-          <Icon
-            size={16}
-            name="shop"
-            family="GalioExtra"
-            color={focused ? 'white' : materialTheme.COLORS.MUTED} />
+          <Ionicons name="ios-home" size={24} color={focused ? 'white' : materialTheme.COLORS.MUTED} />
         );
-      case 'Woman':
+      case 'Vote Airshow':
         return (
-          <Icon
-            size={16}
-            name="users-wm"
-            family="Galio"
-            color={focused ? 'white' : materialTheme.COLORS.MUTED} />
+          <MaterialIcons name="done" size={24} color={focused ? 'white' : materialTheme.COLORS.MUTED} />
         );
-      case 'Man':
+        
+      case 'Temps Réel':
         return (
-          <Icon
-            size={16}
-            name="users-mm"
-            family="Galio"
-            color={focused ? 'white' : materialTheme.COLORS.MUTED} />
+          <Ionicons name="md-time" size={24} color={focused ? 'white' : materialTheme.COLORS.MUTED} />
         );
-      case 'Kids':
+      /*case 'LoadingPage':
         return (
           <Icon
             size={16}
@@ -91,7 +80,7 @@ class DrawerItem extends React.Component {
             name="add-27"
             family="Galio"
             color={focused ? 'white' : materialTheme.COLORS.MUTED} />
-        );
+        );*/
       default:
         return null;
     }
