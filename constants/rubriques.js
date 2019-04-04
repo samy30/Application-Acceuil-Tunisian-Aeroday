@@ -1,16 +1,20 @@
 export default [
     {
-      title: "Qu'est ce que se passe maintenant à l'Aeroday ?",
+      title: "Ce qui se passe maintenant à l'Aeroday ",
       image: require('../assets/images/realTime.jpg'),
       horizontal: true,
     },
     {
-      title: 'Trouvez notre programme détaillé ici',
+      title: 'Le programme détaillé de la journée',
       image: require('../assets/images/ydin2.jpg'),
+      horizontal: true ,
+      
+      
     },
     {
-      title: 'Quelques informations concernant nos chalenges et nos axes ?',
+      title: 'Quelques informations concernant nos challenges et nos axes ',
       image: require('../assets/images/drone3.jpg'),
+      horizontal:true ,
     },
     {
       title: 'Votez pour votre Participant préféré en AirShow',

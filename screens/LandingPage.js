@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Dimensions, ScrollView, Image } from 'react-native';
+import { StyleSheet, Dimensions, ScrollView, ImageBackground } from 'react-native';
 import { Button, Block, Text, Input, theme } from 'galio-framework';
 import { Icon, Rubrique } from '../components/';
 import rubriques from '../constants/rubriques'
@@ -39,6 +39,7 @@ export default class LandingPage extends React.Component {
     const { navigation } = this.props;
 
     return (
+      
       <Block row style={styles.tabs}>
         <Button shadowless style={[styles.tab, styles.divider]} onPress={() => navigation.navigate('Pro')}>
           <Block row middle>
@@ -53,6 +54,7 @@ export default class LandingPage extends React.Component {
           </Block>
         </Button>
       </Block>
+  
     )
   }
 
@@ -64,8 +66,8 @@ export default class LandingPage extends React.Component {
         <Block flex>
           <Rubrique rubrique={rubriques[0]} horizontal />
           <Block flex row>
-            <Rubrique rubrique={rubriques[1]} style={{ marginRight: theme.SIZES.BASE }} />
-            <Rubrique rubrique={rubriques[2]} />
+            <Rubrique rubrique={rubriques[1]}  style={{ marginRight: theme.SIZES.BASE }} />
+            <Rubrique rubrique={rubriques[2]}  />
           </Block>
           <Rubrique rubrique={rubriques[3]} horizontal />
           <Rubrique rubrique={rubriques[4]} full />
@@ -77,9 +79,11 @@ export default class LandingPage extends React.Component {
   render() {
     const { navigation } = this.props;
     return (
+      <ImageBackground source={require('../assets/images/beau2.jpg')} style={{width: '100%', height: '100%'}}>
       <Block flex center style={styles.home}>
         {this.renderProducts()}
       </Block>
+      </ImageBackground>
     );
   }
 }
@@ -96,7 +100,11 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   header: {
-    backgroundColor: theme.COLORS.WHITE,
+  
+    
+    
+  
+    
     shadowColor: theme.COLORS.BLACK,
     shadowOffset: {
       width: 0,

@@ -21,7 +21,11 @@ class Rubrique extends React.Component {
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro', { rubrique: rubrique })}>
           <Block flex space="between" style={styles.rubriqueDescription}>
-            <Text size={14} style={styles.rubriqueTitle}>{rubrique.title}</Text>
+            <Text size={14}
+           
+             style={styles.productTitle}>{rubrique.title}
+           
+         </Text>
           </Block>
         </TouchableWithoutFeedback>
       </Block>
@@ -33,26 +37,33 @@ export default withNavigation(Rubrique);
 
 const styles = StyleSheet.create({
   rubrique: {
-    backgroundColor: theme.COLORS.WHITE,
+    backgroundColor: theme.COLORS.BLUE,
     marginVertical: theme.SIZES.BASE,
     borderWidth: 0,
     minHeight: 114,
   },
   productTitle: {
-    flex: 1,
+    flex: 3,
     flexWrap: 'wrap',
     paddingBottom: 6,
+    fontFamily : 'Roboto' ,
+   color :'#4B6060',
+    fontSize: 15,
+    fontWeight: 'bold',
+    alignItems:'center',
+    justifyContent:'center',
+
   },
   productDescription: {
     padding: theme.SIZES.BASE / 2,
   },
   imageContainer: {
-    elevation: 1,
+    elevation: 0,
   },
   image: {
     borderRadius: 3,
     marginHorizontal: theme.SIZES.BASE / 2,
-    marginTop: -16,
+    //marginTop: -16,
   },
   horizontalImage: {
     height: 122,
