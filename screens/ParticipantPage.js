@@ -6,12 +6,16 @@ import {
     Image,
     ImageBackground,
     Dimensions,
+    TouchableOpacity
 } from 'react-native';
 import {  Block, Text, Input, theme } from 'galio-framework';
+import { registerForPushNotificationsAsync} from '../services'
 
 import { materialTheme, products, Images } from '../constants/';
 import { Select, Icon, Header, Product, Switch,Button } from '../components/';
+import { db } from '../config';
 
+let ParticipantsRef= db.ref('/AirshowParticipants');
 const { width } = Dimensions.get('screen');
 const { height } = Dimensions.get('window');
 
@@ -29,17 +33,28 @@ export default class ParticipantPage extends React.Component {
             email: '',
             nom_equipe: 'the black pearl',
             members: ['jack', 'hector', 'elizabeth', 'william'],
-            img: require('../assets/images/icon.png')
+            img: require('../assets/images/icon.png'),
+            items: []
+
         }
 
 
     }
 
+    componentWillMount(){
+        registerForPushNotificationsAsync() ;
+    }
 
-    onContentSizeChange = (contentWidth, contentHeight) => {
-        // Save the content height in state
-        this.setState({ screenHeight: contentHeight });
-    };
+    componentDidMount() {
+        ParticipantsRef.on('value', snapshot => {
+            let data = snapshot.val();
+            let items = Object.values(data);
+            this.setState({ items });
+        });
+    }
+
+
+
 
 
   render() {
@@ -49,107 +64,34 @@ export default class ParticipantPage extends React.Component {
       var Members = [];
       for (let i = 0 ;  i < this.state.members.length ;i++)
       {
-          Members.push(<Text h2 style={{marginBottom: theme.SIZES.BASE / 2}}>{this.state.members[i]}</Text>);
+          Members.push(<Text h2 style={styles.cardText}>{this.state.members[i]}</Text>);
       }
     return (
-      <View style={styles.container} column scrollEnabled={scrollEnabled} >
+      <ScrollView style={styles.container} column scrollEnabled={scrollEnabled} >
 
-          <View style={{position:'absolute', top:0}}>
-            <View style={{alignItems: 'stretch', height: 80, backgroundColor: 'blue',  marginBottom: 10}}>
+          <TouchableOpacity  style={styles.card}>
+            <View style={{alignItems: 'stretch', height: 80, padding:10 ,  marginBottom: 10}}>
               <Text h1 style={{marginBottom: theme.SIZES.BASE / 2}}>{this.state.nom_equipe}</Text>
             </View>
 
-            <View style={{alignItems: 'center'}}>
+            <View style={{alignItems: 'center'}} >
               {Members}
             </View>
-            <Image style={{alignItems: 'center', width: 200, height: 200,    justifyContent: 'center'}}
+            <Image style={styles.cardImage}
                    source={this.state.img}/>
-              <Text> blabla {'\n'} hahaha </Text>
 
-          </View>
-      </View>
+          </TouchableOpacity>
+      </ScrollView>
     );
 
 
 
 
-      {/* cette partie est pour le test login
-
-        <Text>Participant Page works</Text>
-
-
-
-          <Block flex style={styles.group}>
-              <Text bold size={16} style={styles.title}>Inputs</Text>
-              <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-                  <Input
-                      right
-                      placeholder="icon right"
-                      placeholderTextColor={materialTheme.COLORS.DEFAULT}
-                      style={{ borderRadius: 3, borderColor: materialTheme.COLORS.INPUT }}
-                      onChangeText={(text)=>this.setState( {login:text})}
-                      iconContent={<Icon size={16} color={theme.COLORS.INPUT} name="camera-18" family="GalioExtra"/>}
-                  />
-              </Block>
-          </Block>
-
-          <Text>{this.state.login} {'\n'} {this.state.mdp}</Text>
-
-
-          <Block flex center>
-              <Button
-                  center
-                  shadowless
-                  color={materialTheme.COLORS.DEFAULT}
-                  //textStyle={styles.optionsText}
-                  //style={[styles.optionsButton, styles.shadow]}
-                  >
-                  DELETE
-              </Button>
-          </Block>
-
-
-          <TextInput
-              style={styles.input}
-              onChangeText={(text) => this.setState({login: text})}
-              placeholder="login"
-              value={"Admin"}
-          />
-
-          <TextInput
-              style={styles.input}
-              onChangeText={(text) => this.setState({mdp:text})}
-              secureTextEntry={true}
-              placeholder="Password"
-              value={"Admin"}
-          />
-          <Text>
-              {this.state.login} {`\n`}
-              {this.state.mdp} {`\n`}
-          </Text>
-          <Button
-              onPress={()=>this.submit.bind(this)}
-              title="Sub"
-              color="#841584"
-          />
-
-          <Button shadowless style={[styles.button, styles.shadow]}
-                  onPress={this.submit.bind(this)} >
-            Submit
-          </Button>*/}
 
   }
 
 
-    submit() {
-        //Do Something
-        (((this.state.login).toString() === 'Admin')&&((this.state.mdp).toString() === 'Admin'))?
-            Alert.alert("Access granted", "vous avez l'access"): Alert.alert("Access denied"+(this.state.login.toLocaleLowerCase() === 'admin').toLocaleString(), "vous n'avez pas l'acces"),console.log(this.state.login);
 
-    }
-    submit2(){
-        Alert.alert("asdf", "asdf");
-    }
 }
 
 const styles = StyleSheet.create({
@@ -164,5 +106,27 @@ const styles = StyleSheet.create({
     input: {
         width: 250,
         margin: 5
+    },
+    card: {
+        backgroundColor: '#fff',
+        marginBottom: 10,
+        marginLeft : '2%',
+        width: '90%',
+        shadowColor: '#000',
+        shadowOpacity: 0.2,
+        shadowRadius: 1,
+        shadowOffset:{
+            width:3,
+            height:3
+        }
+    },
+    cardImage:{
+        widht: '90%',
+        height: 200,
+        resizeMode: 'cover'
+    },
+    cardText: {
+      padding: 10,
+        fontSize: 16
     }
 });
